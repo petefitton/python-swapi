@@ -14,11 +14,13 @@ class Person(db.Model):
     eye_color = db.Column(db.String, nullable=False)
     birth_year = db.Column(db.String, nullable=False)
     gender = db.Column(db.String, nullable=False)
-    homeworld_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
-    homeworld = db.relationship('Planet', back_populates='residents')
     created = db.Column(db.String)
     edited = db.Column(db.String)
     url = db.Column(db.String)
+
+    # One-to-many relationship
+    homeworld_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
+    homeworld = db.relationship('Planet', back_populates='residents')
 
     # Many-to-many relationships
     films = db.relationship('Film', secondary=films_people, back_populates='characters')

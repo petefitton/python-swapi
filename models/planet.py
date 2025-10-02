@@ -15,10 +15,12 @@ class Planet(db.Model):
     terrain = db.Column(db.String, nullable=False)
     surface_water = db.Column(db.String, nullable=False)
     population = db.Column(db.String, nullable=False)
-    residents = db.relationship('Person', back_populates='homeworld', lazy=True)
     created = db.Column(db.String)
     edited = db.Column(db.String)
     url = db.Column(db.String)
+
+    # One-to-many relationship
+    residents = db.relationship('Person', back_populates='homeworld', lazy=True)
 
     # Many-to-many relationships
     films = db.relationship('Film', secondary=films_planets, back_populates='planets')
