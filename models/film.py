@@ -1,10 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
+from . import db
 from .associations import films_planets, films_people, films_species, films_starships, films_vehicles
-
-db = SQLAlchemy()
 
 class Film(db.Model):
     __tablename__ = 'films'
+    
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     episode_id = db.Column(db.Integer, nullable=False)
@@ -17,7 +17,7 @@ class Film(db.Model):
     url = db.Column(db.String)
     
     # Many-to-many relationships
-    characters = db.relationship('People', secondary=films_people, back_populates='films')
+    characters = db.relationship('Person', secondary=films_people, back_populates='films')
     planets = db.relationship('Planet', secondary=films_planets, back_populates='films')
     species = db.relationship('Species', secondary=films_species, back_populates='films')
     starships = db.relationship('Starship', secondary=films_starships, back_populates='films')

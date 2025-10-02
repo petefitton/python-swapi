@@ -1,10 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
+from . import db
 from .associations import films_vehicles, people_vehicles
-
-db = SQLAlchemy()
 
 class Vehicle(db.Model):
     __tablename__ = 'vehicles'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     model = db.Column(db.String, nullable=False)
@@ -23,5 +23,5 @@ class Vehicle(db.Model):
 
     # Many-to-many relationships
     films = db.relationship('Film', secondary=films_vehicles, back_populates='vehicles')
-    pilots = db.relationship('People', secondary=people_vehicles, back_populates='vehicles')
+    pilots = db.relationship('Person', secondary=people_vehicles, back_populates='vehicles')
     

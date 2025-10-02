@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 from .film import Film
-from .people import People
+from .person import Person
 from .planet import Planet
 from .species import Species
 from .starship import Starship
