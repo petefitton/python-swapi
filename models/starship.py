@@ -26,3 +26,29 @@ class Starship(db.Model):
     # Many-to-many relationships
     films = db.relationship('Film', secondary=films_starships, back_populates='starships')
     pilots = db.relationship('Person', secondary=people_starships, back_populates='starships')
+    
+    def as_dict(self):
+      films = [self.films[i].name for i in range(len(self.films))]
+      pilots = [self.pilots[i].name for i in range(len(self.pilots))]
+
+      return {
+        'id': self.id,
+        'name': self.name,
+        'model': self.model,
+        'manufacturer': self.manufacturer,
+        'cost_in_credits': self.cost_in_credits,
+        'length': self.length,
+        'max_atmosphering_speed': self.max_atmosphering_speed,
+        'crew': self.crew,
+        'passengers': self.passengers,
+        'cargo_capacity': self.cargo_capacity,
+        'consumables': self.consumables,
+        'hyperdrive_rating': self.hyperdrive_rating,
+        'MGLT': self.MGLT,
+        'starship_class': self.starship_class,
+        'created': self.created,
+        'edited': self.edited,
+        'url': self.url,
+        'films': films,
+        'pilots': pilots,
+      }

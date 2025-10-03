@@ -24,3 +24,25 @@ class Planet(db.Model):
 
     # Many-to-many relationships
     films = db.relationship('Film', secondary=films_planets, back_populates='planets')
+    
+    def as_dict(self):
+      films = [self.films[i].name for i in range(len(self.films))]
+      residents = [self.residents[i].name for i in range(len(self.residents))]
+
+      return {
+        'id': self.id,
+        'name': self.name,
+        'rotation_period': self.rotation_period,
+        'orbital_period': self.orbital_period,
+        'diameter': self.diameter,
+        'climate': self.climate,
+        'gravity': self.gravity,
+        'terrain': self.terrain,
+        'surface_water': self.surface_water,
+        'population': self.population,
+        'created': self.created,
+        'edited': self.edited,
+        'url': self.url,
+        'residents': residents,
+        'films': films,
+      }
