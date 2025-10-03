@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from . import db
 from .associations import films_planets, films_people, films_species, films_starships, films_vehicles
+from .tools.model_to_dict import model_to_dict
 
 class Film(db.Model):
     __tablename__ = 'films'
@@ -23,27 +24,5 @@ class Film(db.Model):
     starships = db.relationship('Starship', secondary=films_starships, back_populates='films')
     vehicles = db.relationship('Vehicle', secondary=films_vehicles, back_populates='films')
 
-    def as_dict(self):
-      characters = [self.characters[i].name for i in range(len(self.characters))]
-      planets = [self.planets[i].name for i in range(len(self.planets))]
-      species = [self.species[i].name for i in range(len(self.species))]
-      starships = [self.starships[i].name for i in range(len(self.starships))]
-      vehicles = [self.vehicles[i].name for i in range(len(self.vehicles))]
-
-      return {
-        'id': self.id,
-        'title': self.title,
-        'episode_id': self.episode_id,
-        'opening_crawl': self.opening_crawl,
-        'director': self.director,
-        'producer': self.producer,
-        'release_date': self.release_date,
-        'created': self.created,
-        'edited': self.edited,
-        'url': self.url,
-        'characters': characters,
-        'planets': planets,
-        'species': species,
-        'starships': starships,
-        'vehicles': vehicles,
-      }
+    def model_to_dict(obj):
+        return model_to_dict(obj)

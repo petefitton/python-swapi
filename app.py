@@ -21,7 +21,7 @@ def index():
 def get_all_films():
     all_films = Film.query.all()
     if len(all_films) > 0:
-        results = [film.as_dict() for film in all_films]
+        results = [film.model_to_dict() for film in all_films]
     else:
         results = []
     return jsonify(results)

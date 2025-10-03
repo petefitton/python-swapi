@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from . import db
 from .associations import films_vehicles, people_vehicles
+from .tools.model_to_dict import model_to_dict
 
 class Vehicle(db.Model):
     __tablename__ = 'vehicles'
@@ -24,27 +25,6 @@ class Vehicle(db.Model):
     # Many-to-many relationships
     films = db.relationship('Film', secondary=films_vehicles, back_populates='vehicles')
     pilots = db.relationship('Person', secondary=people_vehicles, back_populates='vehicles')
-    
-    def as_dict(self):
-      films = [self.films[i].name for i in range(len(self.films))]
-      pilots = [self.pilots[i].name for i in range(len(self.pilots))]
 
-      return {
-        'id': self.id,
-        'name': self.name,
-        'model': self.model,
-        'manufacturer': self.manufacturer,
-        'cost_in_credits': self.cost_in_credits,
-        'length': self.length,
-        'max_atmosphering_speed': self.max_atmosphering_speed,
-        'crew': self.crew,
-        'passengers': self.passengers,
-        'cargo_capacity': self.cargo_capacity,
-        'consumables': self.consumables,
-        'vehicle_class': self.vehicle_class,
-        'created': self.created,
-        'edited': self.edited,
-        'url': self.url,
-        'films': films,
-        'pilots': pilots,
-      }
+    def model_to_dict(obj):
+        return model_to_dict(obj)
