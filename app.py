@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
-from flask import Flask, jsonify
-from models import db, Film, Person, Planet, Species, Starship, Vehicle
+from flask import Flask
+from models import db
 from flask_migrate import Migrate
+from routes import films_bp
 import os
 
 load_dotenv()
@@ -17,15 +18,7 @@ migrate = Migrate(app, db)
 def index():
     return 'Flask API is running!'
 
-@app.route('/films')
-def get_all_films():
-    all_films = Film.query.all()
-    if len(all_films) > 0:
-        results = [film.model_to_dict() for film in all_films]
-    else:
-        results = []
-    return jsonify(results)
-
+app.register_blueprint(films_bp)
 
 
 if __name__ == '__main__':
