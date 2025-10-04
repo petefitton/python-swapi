@@ -34,17 +34,16 @@ def import_films():
         with open('seeds/films.json') as file:
             films = json.load(file)
             for f in films:
-                film = Film(
-                    title=f['title'],
-                    episode_id=f['episode_id'],
-                    opening_crawl=f['opening_crawl'],
-                    director=f['director'],
-                    producer=f['producer'],
-                    release_date=f['release_date'],
-                    created=f['created'],
-                    edited=f['edited'],
-                    url=f['url'],
-                )
+                film = Film()
+                film.title=f['title'],
+                film.episode_id=f['episode_id'],
+                film.opening_crawl=f['opening_crawl'],
+                film.director=f['director'],
+                film.producer=f['producer'],
+                film.release_date=f['release_date'],
+                film.created=f['created'],
+                film.edited=f['edited'],
+                film.url=f['url'],
                 db.session.add(film)
             db.session.commit()
 
