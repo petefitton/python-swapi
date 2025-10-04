@@ -29,5 +29,5 @@ class Person(db.Model):
     starships = db.relationship('Starship', secondary=people_starships, back_populates='pilots')
     vehicles = db.relationship('Vehicle', secondary=people_vehicles, back_populates='pilots')
 
-    def model_to_dict(obj):
-        return model_to_dict(obj)
+    def model_to_dict(self):
+        return model_to_dict(self)

@@ -24,5 +24,5 @@ class Film(db.Model):
     starships = db.relationship('Starship', secondary=films_starships, back_populates='films')
     vehicles = db.relationship('Vehicle', secondary=films_vehicles, back_populates='films')
 
-    def model_to_dict(obj):
-        return model_to_dict(obj)
+    def model_to_dict(self):
+        return model_to_dict(self)

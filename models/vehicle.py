@@ -26,5 +26,5 @@ class Vehicle(db.Model):
     films = db.relationship('Film', secondary=films_vehicles, back_populates='vehicles')
     pilots = db.relationship('Person', secondary=people_vehicles, back_populates='vehicles')
 
-    def model_to_dict(obj):
-        return model_to_dict(obj)
+    def model_to_dict(self):
+        return model_to_dict(self)

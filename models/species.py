@@ -27,5 +27,5 @@ class Species(db.Model):
     films = db.relationship('Film', secondary=films_species, back_populates='species')
     people = db.relationship('Person', secondary=species_people, back_populates='species')
 
-    def model_to_dict(obj):
-        return model_to_dict(obj)
+    def model_to_dict(self):
+        return model_to_dict(self)

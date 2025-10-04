@@ -26,5 +26,5 @@ class Planet(db.Model):
     # Many-to-many relationships
     films = db.relationship('Film', secondary=films_planets, back_populates='planets')
 
-    def model_to_dict(obj):
-        return model_to_dict(obj)
+    def model_to_dict(self):
+        return model_to_dict(self)
